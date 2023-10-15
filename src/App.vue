@@ -1,26 +1,27 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="app">
+    <HeaderItem @update="showSideBar"></HeaderItem>
+    <SideBar :class="{'-translate-x-60': !sideBarStatus}" :show="sideBarStatus"></SideBar>
+    <main class="h-full">
+      <div class="pt-20">
+        <router-view></router-view>
+      </div>
+    </main>
+  </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+  import HeaderItem from "@/components/HeaderItem"
+  import SideBar from "./components/SideBar";
+  import { ref } from "vue";
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  let sideBarStatus = ref(false)
+
+  const showSideBar = async() => {
+    sideBarStatus.value = !sideBarStatus.value
   }
-}
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
